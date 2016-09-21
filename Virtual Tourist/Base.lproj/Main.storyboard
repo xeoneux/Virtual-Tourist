@@ -68,7 +68,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Virtual Tourist" id="dbs-Py-0GN">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="wbH-hy-MAv"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="wbH-hy-MAv">
+                            <connections>
+                                <action selector="editMode:" destination="BYZ-38-t0r" id="F37-d5-Z5f"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="editButton" destination="wbH-hy-MAv" id="pKW-FC-T6N"/>

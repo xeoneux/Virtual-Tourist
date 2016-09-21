@@ -11,6 +11,8 @@ import UIKit
 
 class MapViewController: UIViewController {
 
+    var isInEditMode = false
+
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var messageView: UIView!
 
@@ -32,11 +34,19 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(annotation)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    @IBAction func editMode(sender: AnyObject) {
+        isInEditMode = !isInEditMode
 
+        if isInEditMode {
+            editButton.title = "Done"
+            messageView.center.y -= 100
+            mapView.frame.origin.y -= 100
+        } else {
+            editButton.title = "Edit"
+            messageView.center.y += 100
+            mapView.frame.origin.y += 100
+        }
+    }
 
 }
 
