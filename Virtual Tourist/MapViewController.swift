@@ -11,9 +11,25 @@ import UIKit
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var messageView: UIView!
+
+    @IBOutlet weak var editButton: UIBarButtonItem!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPinOnMap(_:)))
+        mapView.addGestureRecognizer(longPressGestureRecognizer)
+    }
+
+    func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.locationInView(mapView)
+        let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
     }
 
     override func didReceiveMemoryWarning() {

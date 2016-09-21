@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-439" y="353"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Virtual Tourist-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,7 +67,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="pSt-Cr-bKQ" secondAttribute="trailing" constant="-20" id="it4-8Z-fZp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dbs-Py-0GN"/>
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="dbs-Py-0GN">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="wbH-hy-MAv"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="wbH-hy-MAv" id="pKW-FC-T6N"/>
+                        <outlet property="mapView" destination="pSt-Cr-bKQ" id="2Kh-sT-bXr"/>
+                        <outlet property="messageView" destination="zlK-mH-MXW" id="caR-Cf-yov"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
