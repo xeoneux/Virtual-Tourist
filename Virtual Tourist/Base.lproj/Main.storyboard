@@ -103,15 +103,57 @@
                                     <constraint firstAttribute="height" constant="200" id="9mb-Te-YTL"/>
                                 </constraints>
                             </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qoi-tj-tlH">
+                                <rect key="frame" x="0.0" y="264" width="600" height="292"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qvX-Kw-5IZ">
+                                    <size key="itemSize" width="140" height="140"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="GXE-Xh-myR">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4h-1R-VPe">
+                                                    <rect key="frame" x="8" y="8" width="124" height="124"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pl7-IN-kmo">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="w8d-gg-ga4"/>
+                                    <barButtonItem title="New Collection" id="0VZ-oG-ox5"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="IAi-du-NNX"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="hnD-8g-RRa" secondAttribute="trailing" constant="-20" id="21g-bW-MrP"/>
                             <constraint firstItem="hnD-8g-RRa" firstAttribute="top" secondItem="dQN-eV-Hfm" secondAttribute="bottom" id="6eO-Cr-yxM"/>
+                            <constraint firstItem="Qoi-tj-tlH" firstAttribute="leading" secondItem="aQN-VJ-Nuy" secondAttribute="leadingMargin" constant="-20" id="8SD-Y8-iGp"/>
                             <constraint firstItem="hnD-8g-RRa" firstAttribute="leading" secondItem="aQN-VJ-Nuy" secondAttribute="leadingMargin" constant="-20" id="Iiy-L4-WBu"/>
+                            <constraint firstItem="pl7-IN-kmo" firstAttribute="leading" secondItem="aQN-VJ-Nuy" secondAttribute="leadingMargin" constant="-20" id="KxI-va-6dr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pl7-IN-kmo" secondAttribute="trailing" constant="-20" id="NS6-zU-0P0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Qoi-tj-tlH" secondAttribute="trailing" constant="-20" id="PiF-PK-Fzb"/>
+                            <constraint firstItem="cUM-Pg-9Sh" firstAttribute="top" secondItem="pl7-IN-kmo" secondAttribute="bottom" id="XMw-jp-zQT"/>
+                            <constraint firstItem="Qoi-tj-tlH" firstAttribute="top" secondItem="hnD-8g-RRa" secondAttribute="bottom" id="bCp-1B-fGL"/>
+                            <constraint firstItem="cUM-Pg-9Sh" firstAttribute="top" secondItem="Qoi-tj-tlH" secondAttribute="bottom" constant="44" id="rn5-RC-V2Y"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionButton" destination="0VZ-oG-ox5" id="Pei-ek-clo"/>
+                        <outlet property="collectionView" destination="Qoi-tj-tlH" id="wFw-3Y-uYI"/>
                         <outlet property="mapView" destination="hnD-8g-RRa" id="040-VD-Dgo"/>
                     </connections>
                 </viewController>

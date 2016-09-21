@@ -12,5 +12,8 @@ import UIKit
 class AlbumViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var collectionView: UICollectionView!
+
+    @IBOutlet weak var collectionButton: UIBarButtonItem!
 
 }
