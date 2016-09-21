@@ -25,6 +25,10 @@ class MapViewController: UIViewController {
         mapView.addGestureRecognizer(longPressGestureRecognizer)
     }
 
+    override func viewDidLayoutSubviews() {
+        messageView.center.y += 100
+    }
+
     func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
         let point = gestureRecognizer.locationInView(mapView)
         let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
