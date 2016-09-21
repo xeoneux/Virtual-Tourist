@@ -30,6 +30,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         messageView.center.y += 100
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "DisplayAlbum" {
+            let albumViewController = segue.destinationViewController as! AlbumViewController
+            let annotation = sender as! MKPointAnnotation
+            albumViewController.annotation = annotation
+        }
+    }
+
     func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer.state != .Began {
             let point = gestureRecognizer.locationInView(mapView)
@@ -42,12 +50,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        let annotation = view.annotation!
+
         if isInEditMode {
-            let annotation = view.annotation!
             mapView.removeAnnotation(annotation)
         } else {
-            let albumViewController = storyboard?.instantiateViewControllerWithIdentifier("Album") as! AlbumViewController
-            navigationController?.pushViewController(albumViewController, animated: true)
+            performSegueWithIdentifier("DisplayAlbum", sender: annotation)
         }
     }
 
