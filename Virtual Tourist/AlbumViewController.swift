@@ -18,4 +18,13 @@ class AlbumViewController: UIViewController {
 
     @IBOutlet weak var collectionButton: UIBarButtonItem!
 
+    override func viewDidLoad() {
+        let center = annotation.coordinate
+        let span = MKCoordinateSpanMake(0.07, 0.07)
+        let region = MKCoordinateRegion(center: center, span: span)
+
+        mapView.setRegion(region, animated: false)
+        mapView.addAnnotation(annotation)
+    }
+
 }
