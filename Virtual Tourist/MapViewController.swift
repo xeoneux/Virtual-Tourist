@@ -9,7 +9,7 @@
 import MapKit
 import UIKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     var isInEditMode = false
 
@@ -20,6 +20,7 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPinOnMap(_:)))
         mapView.addGestureRecognizer(longPressGestureRecognizer)
@@ -36,6 +37,13 @@ class MapViewController: UIViewController {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
+    }
+
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        if isInEditMode {
+            let annotation = view.annotation!
+            mapView.removeAnnotation(annotation)
+        }
     }
 
     @IBAction func editMode(sender: AnyObject) {
