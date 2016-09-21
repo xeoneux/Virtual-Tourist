@@ -130,6 +130,10 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="CUX-b3-KRj" id="ctd-X7-ife"/>
+                                    <outlet property="delegate" destination="CUX-b3-KRj" id="DJU-Od-cxb"/>
+                                </connections>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pl7-IN-kmo">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
