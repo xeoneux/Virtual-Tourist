@@ -1,14 +1,15 @@
 //
-//  ViewController.swift
+//  MapViewController.swift
 //  Virtual Tourist
 //
 //  Created by Aayush Kapoor on 21/09/16.
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
+import MapKit
 import UIKit
 
-class ViewController: UIViewController {
+class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
