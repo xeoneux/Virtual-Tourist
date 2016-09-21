@@ -31,12 +31,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
-        let point = gestureRecognizer.locationInView(mapView)
-        let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
+        if gestureRecognizer.state != .Began {
+            let point = gestureRecognizer.locationInView(mapView)
+            let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
 
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            mapView.addAnnotation(annotation)
+        }
     }
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
