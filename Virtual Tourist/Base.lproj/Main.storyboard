@@ -37,12 +37,33 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pSt-Cr-bKQ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlK-mH-MXW">
+                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOY-of-ilJ">
+                                        <rect key="frame" x="212" y="31" width="177" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Tap Pins to Delete">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Pm9-1W-x6C"/>
+                                    <constraint firstItem="GOY-of-ilJ" firstAttribute="centerX" secondItem="zlK-mH-MXW" secondAttribute="centerX" id="Z3q-3r-Ru6"/>
+                                    <constraint firstItem="GOY-of-ilJ" firstAttribute="centerY" secondItem="zlK-mH-MXW" secondAttribute="centerY" id="h1e-TL-b2P"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zlK-mH-MXW" secondAttribute="bottom" id="20G-rB-crg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zlK-mH-MXW" secondAttribute="trailing" constant="-20" id="Ri5-im-zJU"/>
                             <constraint firstItem="pSt-Cr-bKQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="T7q-0O-jqJ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pSt-Cr-bKQ" secondAttribute="bottom" id="TAr-VV-Go9"/>
                             <constraint firstItem="pSt-Cr-bKQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="agk-7G-l2C"/>
+                            <constraint firstItem="zlK-mH-MXW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="gzz-dI-d0r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pSt-Cr-bKQ" secondAttribute="trailing" constant="-20" id="it4-8Z-fZp"/>
                         </constraints>
                     </view>
