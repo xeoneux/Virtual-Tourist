@@ -12,6 +12,7 @@
 		847DF8C91D9224FE00E1293E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847DF8C71D9224FE00E1293E /* Main.storyboard */; };
 		847DF8CB1D9224FE00E1293E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847DF8CA1D9224FE00E1293E /* Assets.xcassets */; };
 		847DF8CE1D9224FE00E1293E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847DF8CC1D9224FE00E1293E /* LaunchScreen.storyboard */; };
+		847DF8D61D922FE100E1293E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DF8D51D922FE100E1293E /* AlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		847DF8CA1D9224FE00E1293E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		847DF8CD1D9224FE00E1293E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		847DF8CF1D9224FE00E1293E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		847DF8D51D922FE100E1293E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				847DF8C31D9224FE00E1293E /* AppDelegate.swift */,
 				847DF8C51D9224FE00E1293E /* MapViewController.swift */,
+				847DF8D51D922FE100E1293E /* AlbumViewController.swift */,
 				847DF8C71D9224FE00E1293E /* Main.storyboard */,
 				847DF8CA1D9224FE00E1293E /* Assets.xcassets */,
 				847DF8CC1D9224FE00E1293E /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847DF8D61D922FE100E1293E /* AlbumViewController.swift in Sources */,
 				847DF8C61D9224FE00E1293E /* MapViewController.swift in Sources */,
 				847DF8C41D9224FE00E1293E /* AppDelegate.swift in Sources */,
 			);
@@ -288,6 +292,7 @@
 				847DF8D41D9224FE00E1293E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

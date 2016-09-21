@@ -45,6 +45,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if isInEditMode {
             let annotation = view.annotation!
             mapView.removeAnnotation(annotation)
+        } else {
+            let albumViewController = storyboard?.instantiateViewControllerWithIdentifier("Album") as! AlbumViewController
+            navigationController?.pushViewController(albumViewController, animated: true)
         }
     }
 
