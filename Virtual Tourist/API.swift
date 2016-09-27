@@ -22,20 +22,45 @@ struct API {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
         let session = NSURLSession.sharedSession()
 
-        session.dataTaskWithRequest(request, completionHandler: {
+        let task = session.dataTaskWithRequest(request, completionHandler: {
 
             guard $0.2 == nil else {
                 handler(result: nil, error: $0.2)
                 return
             }
 
+            var photoUrls = [NSURL]()
+
             do {
                 let data = try NSJSONSerialization.JSONObjectWithData($0.0!, options: .AllowFragments)
-                handler(result: data, error: nil)
+
+                guard let result = data["photos"] as? [String: AnyObject] else {
+                    fatalError("Could not parse result")
+                }
+
+                guard let photos = result["photo"] as? [[String: AnyObject]] else {
+                    fatalError("Could not parse photos")
+                }
+
+                for photo in photos {
+
+                    let id = photo["id"]!
+                    let farm = photo["farm"]!
+                    let server = photo["server"]!
+                    let secret = photo["secret"]!
+
+                    let string = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+                    let url = NSURL(string: string)!
+                    photoUrls.append(url)
+                }
+
+                handler(result: photoUrls, error: nil)
             } catch {
                 print("JSON parse error...")
             }
 
         })
+
+        task.resume()
     }
 }
