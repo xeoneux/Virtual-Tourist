@@ -8,10 +8,18 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 class Photo: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    init(pin: Pin, imageUrl: String, imageData: NSData, context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entityForName("Photo", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+
+        self.pin = pin
+        self.imageUrl = imageUrl
+        self.imageData = imageData
+    }
 
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16A323" minimumToolsVersion="Xcode 7.0">
     <entity name="Photo" representedClassName=".Photo" syncable="YES">
-        <attribute name="filePath" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" attributeType="Binary" syncable="YES"/>
         <attribute name="imageUrl" attributeType="String" syncable="YES"/>
         <relationship name="pin" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
     </entity>
@@ -13,7 +12,7 @@
         <relationship name="photo" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="pin" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Photo" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="Pin" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Photo" positionX="-54" positionY="-9" width="128" height="105"/>
     </elements>
 </model>
