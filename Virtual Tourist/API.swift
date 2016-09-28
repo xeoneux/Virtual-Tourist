@@ -6,13 +6,17 @@
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
+import CoreData
 import Foundation
 
 struct API {
 
     static let apiKey = ""
 
-    static func getPhotoUrlsForLocation(latitude: Double, longitude: Double, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    static func getPhotoUrlsForPin(pin: Pin, handler: (result: AnyObject?, error: NSError?) -> Void) {
+
+        let latitude = pin.latitude
+        let longitude = pin.longitude
 
         let url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(apiKey)" +
         "&lat=\(latitude)&lon=\(longitude)" +
@@ -22,14 +26,12 @@ struct API {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
         let session = NSURLSession.sharedSession()
 
-        let task = session.dataTaskWithRequest(request, completionHandler: {
+        let photosTask = session.dataTaskWithRequest(request, completionHandler: {
 
             guard $0.2 == nil else {
                 handler(result: nil, error: $0.2)
                 return
             }
-
-            var photoUrls = [NSURL]()
 
             do {
                 let data = try NSJSONSerialization.JSONObjectWithData($0.0!, options: .AllowFragments)
@@ -48,19 +50,29 @@ struct API {
                     let farm = photo["farm"]!
                     let server = photo["server"]!
                     let secret = photo["secret"]!
+                    let imageUrl = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
 
-                    let string = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
-                    let url = NSURL(string: string)!
-                    photoUrls.append(url)
+                    let photoTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler: {
+
+                        if $0.2 == nil {
+
+                            // Save Photo
+
+                        } else {
+                            print("Error getting image data")
+                        }
+
+                    })
+
                 }
 
-                handler(result: photoUrls, error: nil)
+                handler(result: nil, error: nil)
             } catch {
                 print("JSON parse error...")
             }
 
         })
 
-        task.resume()
+        photosTask.resume()
     }
 }

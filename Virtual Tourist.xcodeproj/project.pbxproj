@@ -19,6 +19,7 @@
 		84BC350D1D96475F00349660 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC35091D96475F00349660 /* Photo+CoreDataProperties.swift */; };
 		84BC350E1D96475F00349660 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC350A1D96475F00349660 /* Photo.swift */; };
 		84BC35101D964C0F00349660 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC350F1D964C0F00349660 /* API.swift */; };
+		84F34C481D9BADBC002ECC13 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F34C471D9BADBC002ECC13 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		84BC35091D96475F00349660 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		84BC350A1D96475F00349660 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		84BC350F1D964C0F00349660 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		84F34C471D9BADBC002ECC13 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				84BC350F1D964C0F00349660 /* API.swift */,
 				847DF8C31D9224FE00E1293E /* AppDelegate.swift */,
+				84F34C471D9BADBC002ECC13 /* CoreDataStack.swift */,
 				847DF8C51D9224FE00E1293E /* MapViewController.swift */,
 				847DF8D51D922FE100E1293E /* AlbumViewController.swift */,
 				847DF8C71D9224FE00E1293E /* Main.storyboard */,
@@ -161,6 +164,7 @@
 				847DF8D61D922FE100E1293E /* AlbumViewController.swift in Sources */,
 				847DF8C61D9224FE00E1293E /* MapViewController.swift in Sources */,
 				847DF8C41D9224FE00E1293E /* AppDelegate.swift in Sources */,
+				84F34C481D9BADBC002ECC13 /* CoreDataStack.swift in Sources */,
 				84BC350C1D96475F00349660 /* Pin.swift in Sources */,
 				84BC350B1D96475F00349660 /* Pin+CoreDataProperties.swift in Sources */,
 				84BC35101D964C0F00349660 /* API.swift in Sources */,
