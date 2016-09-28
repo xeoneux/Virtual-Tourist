@@ -55,15 +55,14 @@ struct API {
                     let photoTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler: {
 
                         if $0.2 == nil {
-
-                            // Save Photo
-
+                            CoreDataStackManager.sharedInstance().saveContext()
                         } else {
                             print("Error getting image data")
                         }
 
                     })
 
+                    photoTask.resume()
                 }
 
                 handler(result: nil, error: nil)
