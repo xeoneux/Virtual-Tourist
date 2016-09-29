@@ -20,11 +20,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        API.getPhotoUrlsForLocation(0, longitude: 0, handler: {
-            print($0.result!)
-        })
-
         mapView.delegate = self
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPinOnMap(_:)))

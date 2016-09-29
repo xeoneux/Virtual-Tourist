@@ -26,6 +26,12 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
         mapView.setRegion(region, animated: false)
         mapView.addAnnotation(annotation)
 
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        let pin = Pin(coordinate: annotation.coordinate, context: context)
+        API.getPhotoUrlsForPin(pin, handler: {
+            print($0.result)
+        })
+
         collectionView.backgroundColor = UIColor.whiteColor()
     }
 
