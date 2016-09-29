@@ -42,7 +42,10 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! PhotoCollectionViewCell
+
+        cell.imageView.image = UIImage.init()
+
         return cell
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842C7EC01D9CB301004D90DF /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C7EBF1D9CB301004D90DF /* PhotoCollectionViewCell.swift */; };
 		847DF8C41D9224FE00E1293E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DF8C31D9224FE00E1293E /* AppDelegate.swift */; };
 		847DF8C61D9224FE00E1293E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DF8C51D9224FE00E1293E /* MapViewController.swift */; };
 		847DF8C91D9224FE00E1293E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847DF8C71D9224FE00E1293E /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		842C7EBF1D9CB301004D90DF /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		847DF8C01D9224FE00E1293E /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847DF8C31D9224FE00E1293E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		847DF8C51D9224FE00E1293E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				84F34C471D9BADBC002ECC13 /* CoreDataStack.swift */,
 				847DF8C51D9224FE00E1293E /* MapViewController.swift */,
 				847DF8D51D922FE100E1293E /* AlbumViewController.swift */,
+				842C7EBF1D9CB301004D90DF /* PhotoCollectionViewCell.swift */,
 				847DF8C71D9224FE00E1293E /* Main.storyboard */,
 				847DF8CA1D9224FE00E1293E /* Assets.xcassets */,
 				847DF8CC1D9224FE00E1293E /* LaunchScreen.storyboard */,
@@ -168,6 +171,7 @@
 				84BC350C1D96475F00349660 /* Pin.swift in Sources */,
 				84BC350B1D96475F00349660 /* Pin+CoreDataProperties.swift in Sources */,
 				84BC35101D964C0F00349660 /* API.swift in Sources */,
+				842C7EC01D9CB301004D90DF /* PhotoCollectionViewCell.swift in Sources */,
 				847DF8D91D92420C00E1293E /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
