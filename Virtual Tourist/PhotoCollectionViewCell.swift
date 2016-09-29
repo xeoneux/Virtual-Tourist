@@ -12,5 +12,12 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    override func prepareForReuse() {
+        if imageView.image == nil {
+            activityIndicator.hidden = false
+            activityIndicator.startAnimating()
+        }
+    }
     
 }
