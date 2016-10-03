@@ -6,6 +6,7 @@
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
+import CoreData
 import MapKit
 import UIKit
 
@@ -24,6 +25,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.addPinOnMap(_:)))
         mapView.addGestureRecognizer(longPressGestureRecognizer)
+
+        fetchAllPins().forEach {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = $0.coordinate
+            mapView.addAnnotation(annotation)
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -38,6 +45,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
 
+    func fetchAllPins() -> [Pin] {
+        let fetchRequest = NSFetchRequest(entityName: "Pin")
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        return try! context.executeFetchRequest(fetchRequest) as! [Pin]
+    }
+
     func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer.state != .Began {
             let point = gestureRecognizer.locationInView(mapView)
@@ -46,6 +59,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
+
+            let context = CoreDataStackManager.sharedInstance().managedObjectContext
+            _ = Pin(coordinate: coordinate, context: context)
+            CoreDataStackManager.sharedInstance().saveContext()
         }
     }
 
@@ -54,6 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         if isInEditMode {
             mapView.removeAnnotation(annotation)
+            CoreDataStackManager.sharedInstance().saveContext()
         } else {
             performSegueWithIdentifier("DisplayAlbum", sender: annotation)
         }

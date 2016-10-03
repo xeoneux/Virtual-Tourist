@@ -17,7 +17,6 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
-
     @IBOutlet weak var collectionButton: UIBarButtonItem!
 
     override func viewDidLoad() {

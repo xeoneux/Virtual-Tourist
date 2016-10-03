@@ -55,8 +55,9 @@ struct API {
                     let photoTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler: {
 
                         if $0.2 == nil {
-                            print("Got image data...")
-                            handler(result: $0.0, error: nil)
+                            dispatch_async(dispatch_get_main_queue(), {
+                                CoreDataStackManager.sharedInstance().saveContext()
+                            })
                         } else {
                             print("Error getting image data")
                         }

@@ -17,10 +17,15 @@ class Pin: NSManagedObject {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+
     init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext) {
         let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
 
+        self.hasPhotos = false
         self.latitude = coordinate.latitude
         self.longitude = coordinate.longitude
     }
