@@ -13,13 +13,16 @@ import UIKit
 
 class Photo: NSManagedObject {
 
-    init(pin: Pin, imageUrl: String, imageData: NSData, context: NSManagedObjectContext) {
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+
+    init(pin: Pin, imageUrl: String, context: NSManagedObjectContext) {
         let entity = NSEntityDescription.entityForName("Photo", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
 
         self.pin = pin
         self.imageUrl = imageUrl
-        self.imageData = imageData
     }
 
 }

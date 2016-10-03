@@ -2,7 +2,7 @@
 //  Pin+CoreDataProperties.swift
 //  Virtual Tourist
 //
-//  Created by Aayush Kapoor on 27/09/16.
+//  Created by Aayush Kapoor on 03/10/16.
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
