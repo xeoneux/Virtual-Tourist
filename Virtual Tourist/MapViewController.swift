@@ -41,7 +41,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if segue.identifier == "DisplayAlbum" {
             let albumViewController = segue.destinationViewController as! AlbumViewController
             let annotation = sender as! MKPointAnnotation
-            albumViewController.annotation = annotation
+            let pin = searchPin(annotation)
+            albumViewController.pin = pin
         }
     }
 
@@ -49,6 +50,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let fetchRequest = NSFetchRequest(entityName: "Pin")
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
         return try! context.executeFetchRequest(fetchRequest) as! [Pin]
+    }
+
+    func searchPin(annotation: MKPointAnnotation) -> Pin {
+        return fetchAllPins().filter {
+            $0.coordinate.latitude == annotation.coordinate.latitude
+            &&
+            $0.coordinate.longitude == annotation.coordinate.longitude
+        }.first!
     }
 
     func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
@@ -61,7 +70,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(annotation)
 
             let context = CoreDataStackManager.sharedInstance().managedObjectContext
-            _ = Pin(coordinate: coordinate, context: context)
+            Pin(coordinate: coordinate, context: context)
             CoreDataStackManager.sharedInstance().saveContext()
         }
     }

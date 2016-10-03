@@ -13,22 +13,21 @@ import UIKit
 class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
 
     var pin: Pin!
-    var annotation: MKPointAnnotation!
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionButton: UIBarButtonItem!
 
     override func viewDidLoad() {
-        let center = annotation.coordinate
+        let center = pin.coordinate
         let span = MKCoordinateSpanMake(0.07, 0.07)
         let region = MKCoordinateRegion(center: center, span: span)
-
         mapView.setRegion(region, animated: false)
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = pin.coordinate
         mapView.addAnnotation(annotation)
 
-        let context = CoreDataStackManager.sharedInstance().managedObjectContext
-        pin = Pin(coordinate: annotation.coordinate, context: context)
         API.getPhotoUrlsForPin(pin, handler: {
             print($0.result)
         })
