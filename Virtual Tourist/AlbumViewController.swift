@@ -6,11 +6,13 @@
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
+import CoreData
 import MapKit
 import UIKit
 
-class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
 
+    var pin: Pin!
     var annotation: MKPointAnnotation!
 
     @IBOutlet weak var mapView: MKMapView!
@@ -27,13 +29,26 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
         mapView.addAnnotation(annotation)
 
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
-        let pin = Pin(coordinate: annotation.coordinate, context: context)
+        pin = Pin(coordinate: annotation.coordinate, context: context)
         API.getPhotoUrlsForPin(pin, handler: {
             print($0.result)
         })
 
         collectionView.backgroundColor = UIColor.whiteColor()
     }
+
+    // MARK: Core Data
+
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        let fetchRequest = NSFetchRequest(entityName: "Photo")
+        fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin)
+
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+
+        let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultController.delegate = self
+        return fetchedResultController
+    }()
 
     // MARK: Collection View
 
