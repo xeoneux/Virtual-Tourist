@@ -55,7 +55,11 @@ struct API {
                     let photoTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler: {
 
                         if $0.2 == nil {
+                            let imageData = $0.0!
+
                             dispatch_async(dispatch_get_main_queue(), {
+                                let context = CoreDataStackManager.sharedInstance().managedObjectContext
+                                Photo(pin: pin, imageUrl: imageUrl, imageData: imageData, context: context)
                                 CoreDataStackManager.sharedInstance().saveContext()
                             })
                         } else {

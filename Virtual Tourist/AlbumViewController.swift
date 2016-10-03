@@ -40,6 +40,7 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "Photo")
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin)
+        fetchRequest.sortDescriptors = []
 
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
