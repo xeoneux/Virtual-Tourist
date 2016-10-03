@@ -52,7 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return try! context.executeFetchRequest(fetchRequest) as! [Pin]
     }
 
-    func searchPin(annotation: MKPointAnnotation) -> Pin {
+    func searchPin(annotation: MKAnnotation) -> Pin {
         return fetchAllPins().filter {
             $0.coordinate.latitude == annotation.coordinate.latitude
             &&
@@ -80,6 +80,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         if isInEditMode {
             mapView.removeAnnotation(annotation)
+
+            let context = CoreDataStackManager.sharedInstance().managedObjectContext
+            context.deleteObject(searchPin(annotation))
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
             performSegueWithIdentifier("DisplayAlbum", sender: annotation)
