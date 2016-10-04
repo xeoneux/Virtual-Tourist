@@ -53,12 +53,16 @@ struct API {
 
                     let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
-                    Photo(pin: pin, imageUrl: imageUrl, context: context)
-                    CoreDataStackManager.sharedInstance().saveContext()
+                    dispatch_async(dispatch_get_main_queue(), {
+                        Photo(pin: pin, imageUrl: imageUrl, context: context)
+                        CoreDataStackManager.sharedInstance().saveContext()
+                    })
                 }
 
-                pin.hasPhotos = true
-                CoreDataStackManager.sharedInstance().saveContext()
+                dispatch_async(dispatch_get_main_queue(), {
+                    pin.hasPhotos = true
+                    CoreDataStackManager.sharedInstance().saveContext()
+                })
 
             } catch {
                 print("JSON parse error...")
