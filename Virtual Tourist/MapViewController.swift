@@ -70,22 +70,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(annotation)
 
             let context = CoreDataStackManager.sharedInstance().managedObjectContext
-            Pin(coordinate: coordinate, context: context)
+            let pin = Pin(coordinate: coordinate, context: context)
             CoreDataStackManager.sharedInstance().saveContext()
+
+            API.getPhotoUrlsForPin(pin)
         }
     }
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         let annotation = view.annotation!
+        let pin = searchPin(annotation)
 
         if isInEditMode {
             mapView.removeAnnotation(annotation)
 
             let context = CoreDataStackManager.sharedInstance().managedObjectContext
-            context.deleteObject(searchPin(annotation))
+            context.deleteObject(pin)
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
-            performSegueWithIdentifier("DisplayAlbum", sender: annotation)
+            if pin.hasPhotos == true {
+                performSegueWithIdentifier("DisplayAlbum", sender: annotation)
+            } else {
+                print("Fetching photo urls for selected pin")
+            }
         }
     }
 

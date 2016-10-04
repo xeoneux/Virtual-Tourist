@@ -28,10 +28,6 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
         annotation.coordinate = pin.coordinate
         mapView.addAnnotation(annotation)
 
-        API.getPhotoUrlsForPin(pin, handler: {
-            print($0.result)
-        })
-
         collectionView.backgroundColor = UIColor.whiteColor()
     }
 

@@ -13,7 +13,7 @@ struct API {
 
     static let apiKey = ""
 
-    static func getPhotoUrlsForPin(pin: Pin, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    static func getPhotoUrlsForPin(pin: Pin) {
 
         let latitude = pin.latitude
         let longitude = pin.longitude
@@ -29,8 +29,7 @@ struct API {
         let photosTask = session.dataTaskWithRequest(request, completionHandler: {
 
             guard $0.2 == nil else {
-                handler(result: nil, error: $0.2)
-                return
+                fatalError($0.2!.domain)
             }
 
             do {
