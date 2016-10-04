@@ -62,6 +62,7 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
         } else {
             cell.activityIndicator.hidden = false
             cell.activityIndicator.startAnimating()
+            cell.imageView.image = UIImage(named: "placeholder")
             API.getImageForPhoto(photo, handler: {
                 cell.activityIndicator.hidden = true
                 collectionView.reloadItemsAtIndexPaths([indexPath])
