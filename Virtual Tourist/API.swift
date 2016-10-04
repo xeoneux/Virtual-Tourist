@@ -69,15 +69,19 @@ struct API {
         photosTask.resume()
     }
 
-    static func getImageForPhoto(photo: Photo) {
+    static func getImageForPhoto(photo: Photo, handler: () -> Void) {
 
         let url = NSURL(string: photo.imageUrl!)
         let session = NSURLSession.sharedSession()
         let photoTask = session.dataTaskWithURL(url!, completionHandler: {
 
             if $0.2 == nil {
-                photo.imageData = $0.0
-                CoreDataStackManager.sharedInstance().saveContext()
+                let imageData = $0.0
+                dispatch_async(dispatch_get_main_queue(), {
+                    photo.imageData = imageData
+                    CoreDataStackManager.sharedInstance().saveContext()
+                    handler()
+                })
             } else {
                 print("Error getting image data")
             }

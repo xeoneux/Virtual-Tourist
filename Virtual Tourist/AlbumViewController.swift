@@ -61,7 +61,10 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
             cell.activityIndicator.hidden = true
             cell.imageView.image = UIImage(data: photo.imageData!)
         } else {
-            API.getImageForPhoto(photo)
+            API.getImageForPhoto(photo, handler: {
+                cell.activityIndicator.hidden = true
+                collectionView.reloadItemsAtIndexPaths([indexPath])
+            })
         }
         return cell
     }
