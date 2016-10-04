@@ -53,6 +53,20 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! PhotoCollectionViewCell
+
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Photo")
+        fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin)
+        let result = try! context.executeFetchRequest(fetchRequest) as! [Photo]
+
+        let photo = result[indexPath.row]
+
+        if photo.imageData != nil {
+            cell.activityIndicator.hidden = true
+            cell.imageView.image = UIImage(data: result[indexPath.row].imageData!)
+        } else {
+            API.getImageForPhoto(photo)
+        }
         return cell
     }
     
