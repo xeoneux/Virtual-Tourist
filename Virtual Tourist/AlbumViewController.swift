@@ -32,6 +32,32 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
         collectionView.backgroundColor = UIColor.whiteColor()
     }
 
+    @IBAction func collectionButtonTapped(sender: AnyObject) {
+        let photos = fetchedResultsController.fetchedObjects as! [Photo]
+        let indexPaths = collectionView.indexPathsForVisibleItems()
+
+        indexPaths.forEach {
+            let cell = collectionView.cellForItemAtIndexPath($0) as! PhotoCollectionViewCell
+            cell.imageView.image = UIImage(named: "placeholder")
+        }
+
+        photos.forEach {
+            $0.imageData = nil
+        }
+
+        API.getPhotoUrlsForPin(pin, handler: {
+            let imageUrls = $0
+
+            dispatch_async(dispatch_get_main_queue(), {
+                for (index, imageUrl) in imageUrls.enumerate() {
+                    photos[index].imageUrl = imageUrl
+                }
+
+                self.collectionView.reloadData()
+            })
+        })
+    }
+
     // MARK: Core Data
 
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -50,9 +76,8 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
-        let context = CoreDataStackManager.sharedInstance().managedObjectContext
-
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+
         cell.activityIndicator.hidden = false
         cell.activityIndicator.startAnimating()
         cell.imageView.image = UIImage(named: "placeholder")
