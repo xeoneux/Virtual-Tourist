@@ -52,24 +52,13 @@ struct API {
                     let secret = photo["secret"]!
                     let imageUrl = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
 
-                    let photoTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler: {
+                    let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
-                        if $0.2 == nil {
-                            let imageData = $0.0!
-
-                            dispatch_async(dispatch_get_main_queue(), {
-                                let context = CoreDataStackManager.sharedInstance().managedObjectContext
-                                Photo(pin: pin, imageUrl: imageUrl, imageData: imageData, context: context)
-                                CoreDataStackManager.sharedInstance().saveContext()
-                            })
-                        } else {
-                            print("Error getting image data")
-                        }
-
-                    })
-
-                    photoTask.resume()
+                    Photo(pin: pin, imageUrl: imageUrl, context: context)
                 }
+
+                pin.hasPhotos = true
+                CoreDataStackManager.sharedInstance().saveContext()
 
             } catch {
                 print("JSON parse error...")
@@ -78,5 +67,21 @@ struct API {
         })
 
         photosTask.resume()
+    }
+
+    static func getPhotoForUrl(pin: Pin, imageUrl: NSURL, handler: (result: AnyObject?, error: NSError?) -> Void) {
+
+        let session = NSURLSession.sharedSession()
+        let photoTask = session.dataTaskWithURL(imageUrl, completionHandler: {
+
+            if $0.2 == nil {
+                handler(result: $0.0, error: nil)
+            } else {
+                print("Error getting image data")
+            }
+
+        })
+
+        photoTask.resume()
     }
 }

@@ -15,8 +15,10 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         if imageView.image == nil {
-            activityIndicator.hidden = false
-            activityIndicator.startAnimating()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.activityIndicator.hidden = false
+                self.activityIndicator.startAnimating()
+            })
         }
     }
     
