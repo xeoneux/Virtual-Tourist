@@ -13,12 +13,17 @@ struct API {
 
     static let apiKey = ""
 
-    static func getPhotoUrlsForPin(pin: Pin) {
+    static func getPhotoUrlsForPin(pin: Pin, handler: (result: [String]) -> Void) {
 
         let latitude = pin.latitude
         let longitude = pin.longitude
 
+        let sortOptions = ["date-posted-asc", "date-posted-desc", "date-taken-asc", "date-taken-desc", "interestingness-desc", "interestingness-asc", "relevance"]
+
+        let sortOption = sortOptions[Int(arc4random_uniform(UInt32(sortOptions.count)))]
+
         let url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(apiKey)" +
+        "&sort=\(sortOption)" +
         "&lat=\(latitude)&lon=\(longitude)" +
         "&per_page=21&format=json&nojsoncallback=1"
         .stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
@@ -43,26 +48,16 @@ struct API {
                     fatalError("Could not parse photos")
                 }
 
-                for photo in photos {
+                let photoUrls: [String] = photos.map {
+                    let id = $0["id"]!
+                    let farm = $0["farm"]!
+                    let server = $0["server"]!
+                    let secret = $0["secret"]!
 
-                    let id = photo["id"]!
-                    let farm = photo["farm"]!
-                    let server = photo["server"]!
-                    let secret = photo["secret"]!
-                    let imageUrl = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_q.jpg"
-
-                    let context = CoreDataStackManager.sharedInstance().managedObjectContext
-
-                    dispatch_async(dispatch_get_main_queue(), {
-                        Photo(pin: pin, imageUrl: imageUrl, context: context)
-                        CoreDataStackManager.sharedInstance().saveContext()
-                    })
+                    return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_q.jpg"
                 }
 
-                dispatch_async(dispatch_get_main_queue(), {
-                    pin.hasPhotos = true
-                    CoreDataStackManager.sharedInstance().saveContext()
-                })
+                handler(result: photoUrls)
 
             } catch {
                 print("JSON parse error...")

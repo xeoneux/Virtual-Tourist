@@ -48,6 +48,34 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     // MARK: Collection View
 
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+        cell.activityIndicator.hidden = false
+        cell.activityIndicator.startAnimating()
+        cell.imageView.image = UIImage(named: "placeholder")
+
+        API.getPhotoUrlsForPin(pin, handler: {
+            let imageUrls = $0
+            let imageUrl = imageUrls[Int(arc4random_uniform(UInt32(imageUrls.count)))]
+
+            dispatch_async(dispatch_get_main_queue(), {
+                photo.imageUrl = imageUrl
+                CoreDataStackManager.sharedInstance().saveContext()
+            })
+
+            API.getImageForPhoto(photo, handler: {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+                    cell.activityIndicator.hidden = true
+                    collectionView.reloadItemsAtIndexPaths([indexPath])
+                })
+            })
+        })
+    }
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 21
     }

@@ -73,7 +73,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let pin = Pin(coordinate: coordinate, context: context)
             CoreDataStackManager.sharedInstance().saveContext()
 
-            API.getPhotoUrlsForPin(pin)
+            API.getPhotoUrlsForPin(pin, handler: {
+                let imageUrls = $0
+                let context = CoreDataStackManager.sharedInstance().managedObjectContext
+
+                dispatch_async(dispatch_get_main_queue(), {
+                    for imageUrl in imageUrls {
+                        Photo(pin: pin, imageUrl: imageUrl, context: context)
+                        CoreDataStackManager.sharedInstance().saveContext()
+                    }
+
+                    pin.hasPhotos = true
+                    CoreDataStackManager.sharedInstance().saveContext()
+                })
+            })
         }
     }
 
