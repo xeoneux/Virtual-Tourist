@@ -49,7 +49,7 @@ struct API {
                     let farm = photo["farm"]!
                     let server = photo["server"]!
                     let secret = photo["secret"]!
-                    let imageUrl = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+                    let imageUrl = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_q.jpg"
 
                     let context = CoreDataStackManager.sharedInstance().managedObjectContext
 

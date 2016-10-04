@@ -54,13 +54,14 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! PhotoCollectionViewCell
-
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
 
         if photo.imageData != nil {
             cell.activityIndicator.hidden = true
             cell.imageView.image = UIImage(data: photo.imageData!)
         } else {
+            cell.activityIndicator.hidden = false
+            cell.activityIndicator.startAnimating()
             API.getImageForPhoto(photo, handler: {
                 cell.activityIndicator.hidden = true
                 collectionView.reloadItemsAtIndexPaths([indexPath])

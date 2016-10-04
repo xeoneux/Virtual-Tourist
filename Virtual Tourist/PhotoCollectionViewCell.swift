@@ -12,14 +12,5 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-    override func prepareForReuse() {
-        if imageView.image == nil {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.activityIndicator.hidden = false
-                self.activityIndicator.startAnimating()
-            })
-        }
-    }
     
 }
