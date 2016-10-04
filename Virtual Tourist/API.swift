@@ -54,6 +54,7 @@ struct API {
                     let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
                     Photo(pin: pin, imageUrl: imageUrl, context: context)
+                    CoreDataStackManager.sharedInstance().saveContext()
                 }
 
                 pin.hasPhotos = true
@@ -68,13 +69,15 @@ struct API {
         photosTask.resume()
     }
 
-    static func getPhotoForUrl(pin: Pin, imageUrl: NSURL, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    static func getImageForPhoto(photo: Photo) {
 
+        let url = NSURL(string: photo.imageUrl!)
         let session = NSURLSession.sharedSession()
-        let photoTask = session.dataTaskWithURL(imageUrl, completionHandler: {
+        let photoTask = session.dataTaskWithURL(url!, completionHandler: {
 
             if $0.2 == nil {
-                handler(result: $0.0, error: nil)
+                photo.imageData = $0.0
+                CoreDataStackManager.sharedInstance().saveContext()
             } else {
                 print("Error getting image data")
             }

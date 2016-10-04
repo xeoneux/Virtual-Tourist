@@ -78,6 +78,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+
+        mapView.deselectAnnotation(view.annotation, animated: true)
+
         let annotation = view.annotation!
         let pin = searchPin(annotation)
 
