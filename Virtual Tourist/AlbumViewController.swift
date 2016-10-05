@@ -35,25 +35,35 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
     @IBAction func collectionButtonTapped(sender: AnyObject) {
         try! fetchedResultsController.performFetch()
         let photos = fetchedResultsController.fetchedObjects as! [Photo]
-        let indexPaths = collectionView.indexPathsForVisibleItems()
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
+        // Immediately show placeholder images
+        let indexPaths = collectionView.indexPathsForVisibleItems()
         indexPaths.forEach {
             let cell = collectionView.cellForItemAtIndexPath($0) as! PhotoCollectionViewCell
             cell.imageView.image = UIImage(named: "placeholder")
         }
 
+        // Delete all photos from context
         photos.forEach {
-            $0.imageData = nil
+            context.deleteObject($0)
+            CoreDataStackManager.sharedInstance().saveContext()
         }
 
+        // Get new photos from Flickr
         API.getPhotoUrlsForPin(pin, handler: {
+
+            // Gets 21 images
             let imageUrls = $0
 
             dispatch_async(dispatch_get_main_queue(), {
-                for (index, imageUrl) in imageUrls.enumerate() {
-                    photos[index].imageUrl = imageUrl
+                for imageUrl in imageUrls {
+                    Photo(pin: self.pin, imageUrl: imageUrl, context: context)
                 }
 
+                // Save and reload data
+                CoreDataStackManager.sharedInstance().saveContext()
+                try! self.fetchedResultsController.performFetch()
                 self.collectionView.reloadData()
             })
         })
