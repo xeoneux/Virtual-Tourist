@@ -33,6 +33,11 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     @IBAction func collectionButtonTapped(sender: AnyObject) {
+
+        // Disable collection button
+        collectionButton.enabled = false
+
+        // Refresh fetched photos data
         try! fetchedResultsController.performFetch()
         let photos = fetchedResultsController.fetchedObjects as! [Photo]
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
@@ -65,6 +70,9 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
                 CoreDataStackManager.sharedInstance().saveContext()
                 try! self.fetchedResultsController.performFetch()
                 self.collectionView.reloadData()
+
+                // Enable collection button
+                self.collectionButton.enabled = true
             })
         })
     }
