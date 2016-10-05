@@ -80,13 +80,14 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
         let context = CoreDataStackManager.sharedInstance().managedObjectContext
 
         context.deleteObject(photo)
+        CoreDataStackManager.sharedInstance().saveContext()
 
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
-        cell.imageView.image = UIImage(named: "placeholder")
+        try! fetchedResultsController.performFetch()
+        collectionView.reloadData()
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 21
+        return fetchedResultsController.fetchedObjects!.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
