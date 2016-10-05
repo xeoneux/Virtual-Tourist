@@ -61,7 +61,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func addPinOnMap(gestureRecognizer: UIGestureRecognizer) {
-        if gestureRecognizer.state != .Began {
+        if gestureRecognizer.state == .Began {
             let point = gestureRecognizer.locationInView(mapView)
             let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
 
