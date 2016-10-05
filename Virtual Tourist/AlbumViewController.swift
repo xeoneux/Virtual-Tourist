@@ -33,6 +33,7 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     @IBAction func collectionButtonTapped(sender: AnyObject) {
+        try! fetchedResultsController.performFetch()
         let photos = fetchedResultsController.fetchedObjects as! [Photo]
         let indexPaths = collectionView.indexPathsForVisibleItems()
 
