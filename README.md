@@ -2,4 +2,4 @@
 
 iOS app to post pins on map and get images of the location.
 
-![Virtual Tourist](https://cloud.githubusercontent.com/assets/3099626/19128587/bf2ca3a4-8b8f-11e6-880a-62cac99d3fc4.png)
+![Virtual Tourist](https://cloud.githubusercontent.com/assets/3099626/19128691/22bb80ca-8b90-11e6-80fe-79027057676a.png)
