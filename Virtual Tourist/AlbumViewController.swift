@@ -76,29 +76,12 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+        let context = CoreDataStackManager.sharedInstance().managedObjectContext
+
+        context.deleteObject(photo)
+
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
-
-        cell.activityIndicator.hidden = false
-        cell.activityIndicator.startAnimating()
         cell.imageView.image = UIImage(named: "placeholder")
-
-        API.getPhotoUrlsForPin(pin, handler: {
-            let imageUrls = $0
-            let imageUrl = imageUrls[Int(arc4random_uniform(UInt32(imageUrls.count)))]
-
-            dispatch_async(dispatch_get_main_queue(), {
-                photo.imageUrl = imageUrl
-                CoreDataStackManager.sharedInstance().saveContext()
-            })
-
-            API.getImageForPhoto(photo, handler: {
-                dispatch_async(dispatch_get_main_queue(), {
-                    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
-                    cell.activityIndicator.hidden = true
-                    collectionView.reloadItemsAtIndexPaths([indexPath])
-                })
-            })
-        })
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,20 +90,25 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! PhotoCollectionViewCell
-        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as? Photo
 
-        if photo.imageData != nil {
-            cell.activityIndicator.hidden = true
-            cell.imageView.image = UIImage(data: photo.imageData!)
-        } else {
-            cell.activityIndicator.hidden = false
-            cell.activityIndicator.startAnimating()
-            cell.imageView.image = UIImage(named: "placeholder")
-            API.getImageForPhoto(photo, handler: {
+        if let photo = photo {
+            if photo.imageData != nil {
                 cell.activityIndicator.hidden = true
-                collectionView.reloadItemsAtIndexPaths([indexPath])
-            })
+                cell.imageView.image = UIImage(data: photo.imageData!)
+            } else {
+                cell.activityIndicator.hidden = false
+                cell.activityIndicator.startAnimating()
+                cell.imageView.image = UIImage(named: "placeholder")
+                API.getImageForPhoto(photo, handler: {
+                    cell.activityIndicator.hidden = true
+                    collectionView.reloadItemsAtIndexPaths([indexPath])
+                })
+            }
+        } else {
+            cell.imageView.image = UIImage(named: "placeholder")
         }
+
         return cell
     }
     
