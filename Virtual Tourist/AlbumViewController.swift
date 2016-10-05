@@ -94,14 +94,13 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
 
         if let photo = photo {
             if photo.imageData != nil {
-                cell.activityIndicator.hidden = true
+                cell.activityIndicator.stopAnimating()
                 cell.imageView.image = UIImage(data: photo.imageData!)
             } else {
-                cell.activityIndicator.hidden = false
                 cell.activityIndicator.startAnimating()
                 cell.imageView.image = UIImage(named: "placeholder")
                 API.getImageForPhoto(photo, handler: {
-                    cell.activityIndicator.hidden = true
+                    cell.activityIndicator.stopAnimating()
                     collectionView.reloadItemsAtIndexPaths([indexPath])
                 })
             }
